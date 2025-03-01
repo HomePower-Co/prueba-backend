@@ -28,11 +28,23 @@ Si se desea, se puede iniciar únicamente un contenedor con la imagen de Postgre
     ```bash
     docker-compose up -d --build
     ```
-
-4. Una vez se descarguen las imágenes, y se cree la imagen del proyecto, ya se puede utiliar la API. Se puede acceder a través de este enlace (siempre y cuando no se haya modficiado la variable de entorno PORT):
+4. Ejecutar las migraciones de prisma directamente en el contenedor (Esto creará la estructura de la base de datos):
+    ```bash
+    docker exec -it homepower-prueba-api npx prisma migrate deploy
+    ```
+5. Una vez se descarguen las imágenes, y se cree la imagen del proyecto, ya se puede utiliar la API. Se puede acceder a través de este enlace (siempre y cuando no se haya modficiado la variable de entorno PORT):
     ```bash
     http://localhost:3000/api
     ```
+
+Para crear un nuevo producto, envía una solicitud `POST` con la estructura del siguiente ejemplo:
+
+```json
+{
+  "name": "Nombre del producto",
+  "price": 20.0000,
+  "stock": 1
+}
 
 Si ya se finalizaron las pruebas de la API, se puede eliminar el contenedor y los volúmenes usando el comando ``docker-compose down -v``.
 
