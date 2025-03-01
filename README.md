@@ -1,63 +1,94 @@
 # 📝 Prueba Técnica - Desarrollador Backend Semi-Senior
 
-## ⚠️ Antes de comenzar
 
-Por favor, **lee toda la prueba completa antes de empezar**. El tiempo estimado para completarla es de **2-3 horas**, pero puedes tomar hasta **24 horas** para entregarla. La entrega se realiza a través de un **Pull Request (PR)** en este repositorio.
+## Sobre el proyecto desarrollado
 
-## 🔥 Instrucciones Generales
+La prueba se realizó en su totalidad, estas son algunas anotaciones extras y comentarios:
+- Se añadieron dos campos a la base de datos: createdAt y updatedAt, que suelen estar para llevar un registro histórico de cuando se creó y actualizó un producto.
+- El proyecto se desarolló totalmente en inglés (código, variables, comentarios, etc), ya que es un lenguaje universal, y es más cómodo a la hora de trabajar desarrollar.
+- Se incluye un archivo .env.template, en el cual se añade la URI para la base de datos, sea local, o mediante docker-compose.
+- Se incluye una sola forma de habilitar db para iniciar el proyecto localmente, que es mediante Docker (Se recomienda usar el docker-compose para inicializar todo el proyecto). De lo contrario, se debe usar una instalación de PostgresSQL local.
+- Se realizó un workflow con Github Actions para realizar las pruebas unitarias una vez se crea un pull request o se envían cambios a la rama main.
 
-1. **Haz un fork** de este repositorio en tu cuenta de GitHub.
-2. Crea una nueva rama con tu nombre o un identificador único:
-   ```bash
-   git checkout -b tu-nombre
-   ```
-3. Desarrolla tu solución en la rama creada.
-4. Una vez finalizado, sube tus cambios a tu repositorio y abre un **Pull Request (PR)** hacia este repositorio.
-5. **Asegúrate de incluir una breve descripción en el PR** explicando tu enfoque y decisiones técnicas.
-6. Puedes usar **IA o cualquier recurso** que consideres necesario, pero ten en cuenta que podrías ser requerido para sustentar tu solución.
+## Instalación de PostgresSQL usando Docker
 
-## 📌 Requerimientos
+Si se desea, se puede iniciar únicamente un contenedor con la imagen de PostgresSQl, en caso de no querer usar el docker-compose conjunto, usando el siguiente comando:
+    ```bash
+    docker-compose -f docker-compose-only-db.yml up -d
+    ```
 
-### 1️⃣ Implementación de API en NestJS
+## Instalación y ejecución del proyecto (Usando Docker) | 🔥 Recomendado
 
-- Crea un servicio en **NestJS** que exponga endpoints para manejar entidades en **PostgreSQL** usando el ORM de tu preferencia (TypeORM o Prisma).
-- Debe incluir CRUD para una entidad llamada `Productos` con los siguientes campos:
-  - `id` (UUID, PK)
-  - `nombre` (string)
-  - `precio` (decimal)
-  - `stock` (entero)
+⚠️ Se requiere tener **Docker Destop** instalado, abierto y funcionando.
 
-### 2️⃣ Seguridad y Buenas Prácticas
+1. Clonar el repositorio.
+2. Abrir una terminal o IDE preferido.
+4. Crear el archivo ``.env`` y copiar el contenido de ``.env.template`` allí. También se puede cambiar el nombre de ``.env.template`` a ``.env`` directamente.
+3. Ejecutar en la terminal el siguiente comando:
+    ```bash
+    docker-compose up -d --build
+    ```
 
-- Implementa **validaciones** con DTOs en los endpoints.
-- Manejo adecuado de **excepciones**.
-- Configuración de variables de entorno con `.env`.
+4. Una vez se descarguen las imágenes, y se cree la imagen del proyecto, ya se puede utiliar la API. Se puede acceder a través de este enlace (siempre y cuando no se haya modficiado la variable de entorno PORT):
+    ```bash
+    http://localhost:3000/api
+    ```
 
-### 3️⃣ Pruebas Unitarias
+Si ya se finalizaron las pruebas de la API, se puede eliminar el contenedor y los volúmenes usando el comando ``docker-compose down -v``.
 
-- Escribe pruebas unitarias para al menos un servicio usando **Jest**.
 
-### 4️⃣ Conocimientos en AWS (Opcional, suma puntos)
+## Instalación y ejecución del proyecto (Sin Docker)
 
-- Describe cómo desplegarías esta API en **AWS ECS + RDS**.
-- Explica brevemente cómo manejarías secretos con **AWS Secrets Manager**.
-- Opcionalmente, agrega un pequeño **Terraform** para crear el RDS.
+⚠️ Se requiere tener **PosgresSQL** instalado.
 
-### 5️⃣ CI/CD con GitHub Actions y Terraform (Opcional, suma puntos)
+1. Clonar el repositorio.
+2. Abrir una terminal o IDE preferido.
+3. Crear el archivo ``.env`` y copiar el contenido de ``.env.template`` allí. También se puede cambiar el nombre de ``.env.template`` a ``.env`` directamente.
+4. Instalar las dependencias del proyecto:
+    ```bash
+    npm install
+    ```
 
-- Crea un workflow en **GitHub Actions** para ejecutar pruebas automáticamente en cada `push` o `PR`.
-- Opcionalmente, agrega un paso en el pipeline para desplegar la API en AWS usando **Terraform**.
+5. Ejecutar el proyecto en modo desarrollo.
+    ```bash
+    npm run start:dev
+    ```
+6. Si se desea, se puede construir los archivos .js usando ``npm run build``, simulando un "despliegue a producción".
 
-## ⏳ Tiempo Estimado
+7. Una vez realizados los pasos anteriores, ya se puede utiliar la API. Se puede acceder a través de este enlace (siempre y cuando no se haya modficiado la variable de entorno PORT):
+    ```bash
+    http://localhost:3000/api
+    ```
 
-Queremos que tengas el tiempo suficiente para hacerlo bien, pero sin presionarte demasiado. Lo ideal es que puedas completarlo en unas **2-3 horas**, pero puedes tomar hasta **24 horas** para entregarlo.
+## ¿Cómo desplegaría esta API con mis conocimientos?
 
-## 📬 Entrega
+De la mano de mis conocimientos actuales, soy capaz de desplegar una API (o sitios web) en un servidor Linux (En AWS, EC2, en Google Cloud, Compute Engine/Virtual Machine) usando Docker o pm2 + el servidor web/proxy nginx. Daré un paso a paso resumido en este caso.
 
-- Haz un **Pull Request** con tu código.
-- Asegúrate de que los endpoints sean funcionales.
-- Si tienes comentarios o explicaciones, agrégalas en el `README.md` de tu fork.
+- Primeramente debemos tener instanciado el servidor linux (Preferiblemente Ubuntu o Debian), e instalar Docker Engine y nginx. (También se puede iniciar con una imagen de nginx desde Docker).
+- Lo único que debe hacerse es descargar es clonar el repositorio y crear usar el docker-compose para crear las imágenes e iniciar los contenedores.
+- Se puede usar la opción de pm2, que requiere la instalación global (npm i -g pm2), y este permite mantener la API iniciada en segundo plano. Se puede habilitar que en caso de alguna caída del servidor, se vuelva a iniciar una vez se restablezca, igual que en Docker.
+- Una vez realizado el procedimiento de iniciar los contenedores, debemos crear la configuración de nginx para que sirva el puerto 3000 como "sitio web", actuando como un proxy. Nos permite mostrar el puerto 3000 directamente en un DNS como apipruebatecnica.homepower.com, por ejemplo. En mi caso, uso Certbox para generar certificados SSL para los proyectos.
+- Cuando usamos nginx no es necesario exponer los puertos de las API (u otros proyectos) para que sea accesible en internet.
+
+# Ventajas y desventajas de este tipo de despliegue
+- La mayor ventaja de este tipo de despliegue es que se tiene control de absolutamente todo el servidor.
+- La mayor desventaja es la escalabilidad, en proveedores que venden solo un servidor con cierto hardware, nos permite ir hasta el límite (o casi) de ese hardware, y no más. Si se lleva al máximo de capacidad, no se podrá escalar fácilmente. Se tendrá que usar un balanceador de carga, o migrar a soluciones Cloud, como es el caso de AWS, que puede mejorar recursos o crear más instancias automáticamente (y balancear carga) a medida del uso de los sistemas.
+
+## ¿Cómo desplegaría esta API en AWS? (Basado en investigación)
+
+Debo decir que nunca había usado AWS ECS ni RDS, sin embargo, un poco de investigación me ayudó a obtener información y obtener un aprendizaje. Realicé el procedimiento usando la capa gratuita de AWS.
+
+- Lo primero es crear un repositorio de ECR (Elastic Container Registry) para poder subir la imagen de Docker, crucial para poder desplegar en ECS.
+- También debemos crear la base de datos en RDS, este procedimiento es muy sencillo. Allí había una opción para usar AWS Secrets Manager para las credenciales de la base de datos. (Que es un servicio de almacenamiento de credenciales. La función más importante que encontré es la rotación automática de credenciales que permite cambiar periódicamente las credenciales de servicios como bases de datos sin interrumpir el acceso a las aplicaciones que las usan.)
+- Posteriormente debemos definir una tarea para poder ejecutar el contenedor. Aquí definimos las variables de entorno que usará el contenedor. Debe incluirse el acceso a la base de datos. (No descubrí aún cómo se puede integrar AWS Secrets Manager en este caso)
+- Ahora debemos crear un cluster en ECS.
+- Una vez creado el Cluster, debemos crear un servicio basado en la tarea creada previamente. 
+
+Este es el paso a paso resumido de la investigación y las pruebas que realicé con la capa gratuita de AWS, hay algunas configuraciones extras como mapeo de puertos, redes, etc, que deben ser tenidas en cuenta para un correcto funcionamiento.
+
 
 ---
 
-¡Buena suerte y esperamos ver tu solución! 🚀
+Con esto finalizo el README.md del repositorio, ¡muchas gracias!
+
+Juan Fernando Cataño Posada.
