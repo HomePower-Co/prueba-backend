@@ -45,6 +45,7 @@ Para crear un nuevo producto, envía una solicitud `POST` con la estructura del 
   "price": 20.0000,
   "stock": 1
 }
+```
 
 Si ya se finalizaron las pruebas de la API, se puede eliminar el contenedor y los volúmenes usando el comando ``docker-compose down -v``.
 
