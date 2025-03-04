@@ -1,63 +1,69 @@
-# 📝 Prueba Técnica - Desarrollador Backend Semi-Senior
+# Prueba tecnica - Products Api
 
-## ⚠️ Antes de comenzar
+## Características
 
-Por favor, **lee toda la prueba completa antes de empezar**. El tiempo estimado para completarla es de **2-3 horas**, pero puedes tomar hasta **24 horas** para entregarla. La entrega se realiza a través de un **Pull Request (PR)** en este repositorio.
+- Operaciones CRUD completas para un recurso.
+- ORM Prisma para la gestión de la base de datos.
+- Base de datos PostgreSQL en un contenedor Docker.
+- Documentación interactiva de la API con Swagger.
+- Validación de datos integrada.
+- Migraciones de base de datos con Prisma.
 
-## 🔥 Instrucciones Generales
+## Pre-requisitos
 
-1. **Haz un fork** de este repositorio en tu cuenta de GitHub.
-2. Crea una nueva rama con tu nombre o un identificador único:
+- Node.js (v18 o superior)
+- Docker y Docker Compose instalados
+- npm o yarn
+
+## Instalación
+
+1. **Instalar dependencias**:
+
    ```bash
-   git checkout -b tu-nombre
+   npm i
    ```
-3. Desarrolla tu solución en la rama creada.
-4. Una vez finalizado, sube tus cambios a tu repositorio y abre un **Pull Request (PR)** hacia este repositorio.
-5. **Asegúrate de incluir una breve descripción en el PR** explicando tu enfoque y decisiones técnicas.
-6. Puedes usar **IA o cualquier recurso** que consideres necesario, pero ten en cuenta que podrías ser requerido para sustentar tu solución.
 
-## 📌 Requerimientos
+2. **Configurar variables de entorno**:
 
-### 1️⃣ Implementación de API en NestJS
+   ```bash
+   Genera un copia del archivo .env.template y renombrarlo a .env
+   Por razones practicas no es necesario cambiar el valor de las vbles
+   ```
 
-- Crea un servicio en **NestJS** que exponga endpoints para manejar entidades en **PostgreSQL** usando el ORM de tu preferencia (TypeORM o Prisma).
-- Debe incluir CRUD para una entidad llamada `Productos` con los siguientes campos:
-  - `id` (UUID, PK)
-  - `nombre` (string)
-  - `precio` (decimal)
-  - `stock` (entero)
+3. **Crear la db usando el archivo docker-compose**:
 
-### 2️⃣ Seguridad y Buenas Prácticas
+   ```bash
+   docker-compose up -d
+   ```
 
-- Implementa **validaciones** con DTOs en los endpoints.
-- Manejo adecuado de **excepciones**.
-- Configuración de variables de entorno con `.env`.
+4. **Ejecutar las migraciones**:
 
-### 3️⃣ Pruebas Unitarias
+   ```bash
+   npx prisma migrate dev
+   ```
 
-- Escribe pruebas unitarias para al menos un servicio usando **Jest**.
+5. **Iniciar la aplicacion**:
 
-### 4️⃣ Conocimientos en AWS (Opcional, suma puntos)
+   ```bash
+   npm run start:dev
+   ```
 
-- Describe cómo desplegarías esta API en **AWS ECS + RDS**.
-- Explica brevemente cómo manejarías secretos con **AWS Secrets Manager**.
-- Opcionalmente, agrega un pequeño **Terraform** para crear el RDS.
+6. **Para ingresar a al documentacion del api**:
 
-### 5️⃣ CI/CD con GitHub Actions y Terraform (Opcional, suma puntos)
+   ```bash
+   http://localhost:3001/api
+   ```
 
-- Crea un workflow en **GitHub Actions** para ejecutar pruebas automáticamente en cada `push` o `PR`.
-- Opcionalmente, agrega un paso en el pipeline para desplegar la API en AWS usando **Terraform**.
+7. **Para ejecutar pruebas**:
 
-## ⏳ Tiempo Estimado
+   ```bash
+   npm run test
+   ```
 
-Queremos que tengas el tiempo suficiente para hacerlo bien, pero sin presionarte demasiado. Lo ideal es que puedas completarlo en unas **2-3 horas**, pero puedes tomar hasta **24 horas** para entregarlo.
+## Para desplegar en AWS usando ECS + RDS
 
-## 📬 Entrega
-
-- Haz un **Pull Request** con tu código.
-- Asegúrate de que los endpoints sean funcionales.
-- Si tienes comentarios o explicaciones, agrégalas en el `README.md` de tu fork.
-
----
-
-¡Buena suerte y esperamos ver tu solución! 🚀
+1. Crear la DB(postgresql) usando el servicio RDS.
+2. Ejecutar la migracion usando la Url asignada en el paso anterior.
+3. Crear imagen del api para subirla a Amazon ECR.
+4. Luego en ECS se crea una Task la cual se le asigna la URI(la url de la imagen en el repositorio) generada en el paso anterior.
+5. Se crea el servicio y se le asigna el puerto que queremos exponer (para nuestro caso el 3001).
