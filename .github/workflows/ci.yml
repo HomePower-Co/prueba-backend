@@ -1,34 +1,68 @@
-name: Run Tests
+name: CI/CD
 
-# Definir los eventos que activan el workflow
 on:
   push:
     branches:
-      - main  # Ejecutar en cada push a la rama principal
+      - main
   pull_request:
     branches:
-      - main  # Ejecutar en cada PR a la rama principal
+      - main
 
-# Definir los jobs que se ejecutarán
 jobs:
-  test:
-    runs-on: ubuntu-latest  # Especificamos que se ejecute en una máquina Ubuntu
+  build:
+    runs-on: ubuntu-latest
 
     steps:
-      # Paso 1: Checkout del código fuente
+      # Paso 1: Checkout del código
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Paso 2: Configurar Node.js (especificamos la versión)
+      # Paso 2: Configurar Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Usa la versión de Node.js que necesitas
+          node-version: '14'
 
       # Paso 3: Instalar dependencias
       - name: Install dependencies
         run: npm install
 
-      # Paso 4: Ejecutar pruebas unitarias (usando Jest, por ejemplo)
+      # Paso 4: Ejecutar pruebas unitarias
       - name: Run tests
         run: npm run test
+
+      # Paso 5: Construir la imagen Docker
+      - name: Build Docker image
+        run: docker build -t productos-api .
+
+      # Paso 6: Iniciar sesión en Amazon ECR
+      - name: Log in to Amazon ECR
+        run: |
+          aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.us-west-2.amazonaws.com
+
+      # Paso 7: Subir la imagen Docker a ECR
+      - name: Push Docker image to ECR
+        run: docker push <aws_account_id>.dkr.ecr.us-west-2.amazonaws.com/productos-api-repo:latest
+
+      # Paso 8: Configurar Terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      # Paso 9: Inicializar Terraform
+      - name: Terraform Init
+        run: terraform init
+
+      # Paso 10: Aplicar Terraform (crear RDS, ECS)
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-west-2
+
+      # (Opcional) Paso 11: Confirmar el despliegue
+      - name: Confirm ECS Deployment
+        run: |
+          aws ecs describe-services --cluster <your-cluster-name> --services <your-service-name> --region us-west-2
