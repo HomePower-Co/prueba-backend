@@ -1,0 +1,34 @@
+name: Run Tests
+
+# Definir los eventos que activan el workflow
+on:
+  push:
+    branches:
+      - main  # Ejecutar en cada push a la rama principal
+  pull_request:
+    branches:
+      - main  # Ejecutar en cada PR a la rama principal
+
+# Definir los jobs que se ejecutarán
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Especificamos que se ejecute en una máquina Ubuntu
+
+    steps:
+      # Paso 1: Checkout del código fuente
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Paso 2: Configurar Node.js (especificamos la versión)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Usa la versión de Node.js que necesitas
+
+      # Paso 3: Instalar dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # Paso 4: Ejecutar pruebas unitarias (usando Jest, por ejemplo)
+      - name: Run tests
+        run: npm run test
