@@ -47,3 +47,16 @@ Este proyecto es una API RESTful construida con **NestJS** y **Prisma** que mane
 - npm run start
 
 La API estará disponible en http://localhost:3000.
+
+Para desplegar en AWS usando ECS + RDS
+
+Crear la DB(postgresql) usando el servicio RDS.
+Ejecutar la migracion usando la Url asignada en el paso anterior.
+Crear imagen del api para subirla a Amazon ECR.
+Luego en ECS se crea una Task la cual se le asigna la url de la imagen en el repositorio generada en el paso anterior.
+Se crea el servicio y se le asigna el puerto que queremos exponer.
+Secrets Manager almacena las credenciales de la base de datos de forma segura.
+Terraform se utiliza para definir la infraestructura (ECS, RDS y Secrets Manager).
+En el GitHub Actions Workflow, se ejecuta Terraform para crear la infraestructura y desplegar la API en AWS ECS.
+AWS RDS proporciona la base de datos, y la API se conecta a ella usando credenciales almacenadas en Secrets Manager.
+Este flujo configura todo el entorno de ECS y RDS en AWS de manera automatizada y segura usando Terraform y GitHub Actions.
