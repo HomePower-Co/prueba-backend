@@ -62,4 +62,20 @@ Queremos que tengas el tiempo suficiente para hacerlo bien, pero sin presionarte
 
 ¡Buena suerte y esperamos ver tu solución! 🚀
 
-https://www.coursera.org/learn/diseo-y-construccin-de-apis/supplement/KX2TE/tutorial-logica-y-pruebas-unitarias-en-nest-js
+# Entrega
+
+Camilo Ramírez Restrepo
+Email: camiloramirezcsj@gmail.com
+Cel: 3126605700
+
+## Versión
+
+Se utilizó la versión v18.20.4 de Node.
+
+## Colecciones
+
+El archivo test-backend.postman_collection.json contiene la coleción en Postman del API desarrollado.
+
+## Pipeline
+
+el archivo .github/workflows/build.yml contiene el pipeline para la ejecución de pruebas y evaluación en sonarcloud.
