@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductosModule } from './productos/productos.module';
@@ -33,6 +34,8 @@ function databaseConfigFromEnv(): TypeOrmModuleOptions {
 @Module({
   imports: [
     ProductosModule,
+    // Carga .env automáticamente
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       ...databaseConfigFromEnv(),
       entities: [ProductosEntity],
