@@ -1,7 +1,6 @@
 # compiled output
 /dist
 /node_modules
-src/cards
 
 # Dependencias de Node.js
 node_modules/
