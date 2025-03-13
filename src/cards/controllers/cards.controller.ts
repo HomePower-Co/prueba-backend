@@ -24,13 +24,13 @@ export class CardsController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateCardsDto) {
-    return this.cardsService.update(id, updateProductDto);
+  update(@Param('id') id: string, @Body() updateCardsDto: UpdateCardsDto) {
+    return this.cardsService.update(id, updateCardsDto);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateCardsDto) {
-    return this.cardsService.update(id, updateProductDto);
+  update(@Param('id') id: string, @Body() updateCardsDto: UpdateCardsDto) {
+    return this.cardsService.update(id, updateCardsDto);
   }
 
   @Delete(':id')
