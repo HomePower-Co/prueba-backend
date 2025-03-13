@@ -64,9 +64,9 @@ Queremos que tengas el tiempo suficiente para hacerlo bien, pero sin presionarte
 
 # Entrega
 
-Camilo Ramírez Restrepo
-Email: camiloramirezcsj@gmail.com
-Cel: 3126605700
+- Camilo Ramírez Restrepo
+- Email: camiloramirezcsj@gmail.com
+- Cel: 3126605700
 
 ## Versión
 
