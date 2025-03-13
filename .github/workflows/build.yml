@@ -1,0 +1,41 @@
+name: Build
+
+on:
+  push: {}
+  pull_request: {}
+
+jobs:
+  sonarcloud:
+    name: SonarCloud Pipeline
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout del repositorio (se requiere el historial completo)
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. Configurar Node.js (ajusta la versión según lo requiera tu proyecto)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.20.4'
+
+      # 3. Instalar dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Configurar variables de entorno para pruebas (en este ejemplo se usa SQLite)
+      - name: Set environment variables
+        run: |
+          echo "DATABASE_URL=sqlite://db.sqlite" >> $GITHUB_ENV
+
+      # 5. Ejecutar tests y generar reporte de cobertura
+      - name: Run tests and generate coverage report
+        run: npm run test:cov
+
+      # 6. Ejecutar el análisis de SonarCloud
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Token generado por GitHub
+          SONAR_TOKEN: d7db8e7173af36a8d7a8891777338f853d28950d  # Token de SonarCloud
