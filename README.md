@@ -61,3 +61,5 @@ Queremos que tengas el tiempo suficiente para hacerlo bien, pero sin presionarte
 ---
 
 ¡Buena suerte y esperamos ver tu solución! 🚀
+
+https://www.coursera.org/learn/diseo-y-construccin-de-apis/supplement/KX2TE/tutorial-logica-y-pruebas-unitarias-en-nest-js
