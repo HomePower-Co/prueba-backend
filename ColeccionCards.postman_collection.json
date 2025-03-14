@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "990791fc-0094-45ac-ad01-c315bb406177",
+		"name": "ColeccionCards",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27039595"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "http://localhost:3000/cards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/cards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/cards",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Año nuevo\",\r\n  \"precio\": 10000,\r\n  \"stock\": 60\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/cards/b855f154-004d-485c-a032-9cbcf9951da9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cards",
+								"b855f154-004d-485c-a032-9cbcf9951da9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "http://localhost:3000/cards",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Año nuevo\",\r\n  \"precio\": 10000,\r\n  \"stock\": 60\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/cards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cards"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PUT",
+			"item": [
+				{
+					"name": "http://localhost:3000/cards",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Feliz Navidad\",\r\n  \"precio\": 10000,\r\n  \"stock\": 50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/cards/b855f154-004d-485c-a032-9cbcf9951da9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cards",
+								"b855f154-004d-485c-a032-9cbcf9951da9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/cards",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"nombre\": \"Navidad\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/cards/b855f154-004d-485c-a032-9cbcf9951da9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cards",
+								"b855f154-004d-485c-a032-9cbcf9951da9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "http://localhost:3000/cards",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"nombre\": \"Navidad\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/cards/875c5212-044e-4411-a291-a330be1a99f7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cards",
+								"875c5212-044e-4411-a291-a330be1a99f7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
