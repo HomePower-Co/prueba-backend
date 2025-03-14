@@ -3,14 +3,14 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 @Entity()
 export class Card {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  nombre: string;
+  nombre!: string;
 
   @Column('decimal')
-  precio: number;
+  precio!: number;
 
   @Column('int')
-  stock: number;
+  stock!: number;
 }

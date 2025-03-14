@@ -2,16 +2,16 @@ import { IsNotEmpty, IsNumber, IsUUID } from 'class-validator';
 
 export class CreateCardsDto {
   @IsNotEmpty()
-  nombre: string;
+  nombre!: string;
 
   @IsNumber()
-  precio: number;
+  precio!: number;
 
   @IsNumber()
-  stock: number;
+  stock!: number;
 }
 
 export class UpdateCardsDto extends CreateCardsDto {
   @IsUUID()
-  id: string;
+  id?: string;
 }
