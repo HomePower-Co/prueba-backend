@@ -11,9 +11,13 @@ export class CardsService {
     private readonly cardRepository: Repository<Card>,
   ) {}
 
-  async create(createCardDto: CreateCardsDto) {
+  async create(createCardDto: Partial<CreateCardsDto>): Promise<Card> {
     const card = this.cardRepository.create(createCardDto);
     return await this.cardRepository.save(card);
+  }
+
+  async findById(id: string) {
+    return this.cardRepository.findOne({ where: { id } });
   }
 
   async findAll() {
