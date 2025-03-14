@@ -17,14 +17,6 @@ build/
 .out/
 .cache/
 
-# Configuración de entorno
-.env
-.env.local
-.env.development
-.env.production
-.env.test
-.env.*.local
-
 # Archivos de logs
 logs/
 *.log
